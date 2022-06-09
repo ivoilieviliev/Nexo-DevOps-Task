@@ -1,3 +1,4 @@
+import py_compile
 from flask import Flask
 
 app = Flask(__name__)
