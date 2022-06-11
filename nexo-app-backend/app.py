@@ -9,6 +9,10 @@ app = Flask(__name__)
 def hello():
     return '<h1>Hello, World!</h1>'
 
+@app.route('/healthz')
+def health():
+  return "Application is alive"
+
 @app.route('/write-data')
 def write():
     db = mysql.connector.connect(
