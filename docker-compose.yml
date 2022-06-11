@@ -2,11 +2,11 @@ version: "3.7"
 
 services:
   app:
-    build: ./backend-application
+    build: ./nexo-app-backend
     ports:
       - 5000:5000
 
   database:
-    build: ./mysql-db
+    build: ./mysql-db-instance
       ports:
         - 3306:3306
