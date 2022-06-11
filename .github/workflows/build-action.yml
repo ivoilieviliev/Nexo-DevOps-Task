@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       service:
-        description: "Choose service to deploy"
+        description: "Choose service between nexo-app-backend and mysql-db-instance"
         required: true
         default: "nexo-app-backend"
 
