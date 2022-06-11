@@ -18,9 +18,9 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
-      - name: docker-build
+      - name: docker-build-and-push
         run: |
-          docker build ./backend-application
+          docker build ./backend-application --tag ghcr.io/$DOCKER_USER/$SERVICE:latest
           echo $DOCKER_PASSWORD | docker login ghcr.io -u $DOCKER_USER --password-stdin
           docker push ghcr.io/$DOCKER_USER/$SERVICE:latest
 
