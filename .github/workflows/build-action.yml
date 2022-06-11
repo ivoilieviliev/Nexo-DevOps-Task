@@ -15,7 +15,7 @@ jobs:
     env:
       SERVICE: ${{ github.event.inputs.service }}
       DOCKER_USER: ivoilieviliev
-      DOCKER_PASSWORD: ${{ secrets.DEVOPS_TOKEN }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
       - name: docker-compose
