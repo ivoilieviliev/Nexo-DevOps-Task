@@ -1,0 +1,28 @@
+# action.yml
+name: nexo-application-build
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: "Choose service to deploy"
+        required: true
+        default: "backend-application"
+
+jobs:
+  nexo-application-build:
+    runs-on: ubuntu-latest
+    env:
+      SERVICE: ${{ github.event.inputs.service }}
+      DOCKER_USER: ivoilieviliev
+      DOCKER_PASSWORD: ${{ secrets.DEVOPS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker-compose
+        run: |
+        docker-compose build
+        echo $DOCKER_PASSWORD | docker login ghcr.io -u $DOCKER_USER --password-stdin
+        docker push ghcr.io/$DOCKER_USER/$SERVICE:latest
+
+
+
