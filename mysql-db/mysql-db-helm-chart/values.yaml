@@ -1,18 +1,18 @@
-# Default values for application-helm-chart.
+# Default values for mysql-db-helm-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: ghcr.io/ivoilieviliev/nexo-app-backend
+  repository: ghcr.io/ivoilieviliev/mysql-db-instance
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets: 
-  - name: backend-secret
-nameOverride: "backend"
+imagePullSecrets:
+  - name: database
+nameOverride: "instance"
 fullnameOverride: ""
 
 serviceAccount:
@@ -39,8 +39,8 @@ securityContext: {}
 
 service:
   type: NodePort
-  port: 5000
-  targetPort: 5000
+  port: 3306
+  targetPort: 3306
 
 ingress:
   enabled: false
@@ -58,22 +58,22 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources:
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 200m
+    memory: 512Mi
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 256Mi
 
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 1
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 

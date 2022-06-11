@@ -7,7 +7,7 @@ on:
       service:
         description: "Choose service to deploy"
         required: true
-        default: "backend-application"
+        default: "nexo-app-backend"
 
 jobs:
   nexo-application-build:
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: docker-build-and-push
         run: |
-          docker build ./backend-application --tag ghcr.io/$DOCKER_USER/$SERVICE:latest
+          docker build ./$SERVICE --tag ghcr.io/$DOCKER_USER/$SERVICE:latest
           echo $DOCKER_PASSWORD | docker login ghcr.io -u $DOCKER_USER --password-stdin
           docker push ghcr.io/$DOCKER_USER/$SERVICE:latest
 

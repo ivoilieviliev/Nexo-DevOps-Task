@@ -9,10 +9,10 @@ app = Flask(__name__)
 def hello():
     return '<h1>Hello, World!</h1>'
 
-@app.route('/write-name')
+@app.route('/write-data')
 def write():
     db = mysql.connector.connect(
-        host = "localhost",
+        host = "mysql-db-instance.default.svc.cluster.local",
         user = "root",
         passwd = "supersecret",
         database = "company"
@@ -23,14 +23,13 @@ def write():
     cursor.execute(query, values)
     db.commit()
 
-    print(cursor.rowcount, "record inserted")
     cursor.close()
     return "User has been added"
 
-@app.route('/read-name')
+@app.route('/read-data')
 def read():
     db = mysql.connector.connect(
-        host = "localhost",
+        host = "mysql-db-instance.default.svc.cluster.local",
         user = "root",
         passwd = "supersecret",
         database = "company"
